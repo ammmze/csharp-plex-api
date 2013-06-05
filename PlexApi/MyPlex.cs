@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RestSharp;
+using System.Xml;
 
 namespace PlexAPI
 {
@@ -75,6 +76,40 @@ namespace PlexAPI
             return Execute<T>(request, client);
         }
 
+        public String Execute(RestRequest request, RestClient client)
+        {
+            var response = client.Execute(request);
+
+            if (response.ErrorException != null)
+            {
+                throw response.ErrorException;
+            }
+            return response.Content;
+        }
+
+        public String Execute(RestRequest request, User user)
+        {
+            var client = GetRestClient();
+
+            request = AddPlexHeaders(request);
+
+            request.AddParameter("auth_token", user.authenticationToken);
+
+            return Execute(request, client);
+        }
+
+        public String Execute(RestRequest request, String username, String password)
+        {
+
+            var client = GetRestClient();
+
+            request = AddPlexHeaders(request);
+
+            client.Authenticator = new HttpBasicAuthenticator(username, password);
+
+            return Execute(request, client);
+        }
+
         public User authenticate(string username, string password)
         {
             var client = new RestClient();
@@ -85,7 +120,37 @@ namespace PlexAPI
             request.Resource = "users/sign_in.xml";
             request.RootElement = "user";
 
-            var user = Execute<User>(request, username, password);
+            var xml = Execute(request, username, password);
+            /*
+            <?xml version="1.0" encoding="UTF-8"?>
+            <user email="" id="" thumb="http://www.gravatar.com/avatar/HASH?d=404" username="" queueEmail="" queueUid="" cloudSyncDevice="" authenticationToken="">
+                <subscription active="1" status="Active" plan="monthly">
+                    <feature id="pass"/>
+                    <feature id="sync"/>
+                </subscription>
+                <username></username>
+                <email></email>
+                <joined-at type="datetime">2001-01-01 00:00:00 UTC</joined-at>
+                <authentication-token></authentication-token>
+            </user>
+            */
+            XmlDocument xmlDoc = new XmlDocument(); //* create an xml document object.
+            xmlDoc.LoadXml(xml); //* load the XML document from the specified file.
+
+            //* Get elements.
+            XmlNodeList user_nodes = xmlDoc.GetElementsByTagName("user");
+            var user = new User();
+            if (user_nodes.Count == 1) {
+                XmlNode user_node = user_nodes.Item(0);
+                user.email = user_node.Attributes["email"].Value;
+                user.id = Int32.Parse(user_node.Attributes["id"].Value);
+                user.thumb = user_node.Attributes["thumb"].Value;
+                user.username = user_node.Attributes["username"].Value;
+                user.queueEmail = user_node.Attributes["queueEmail"].Value;
+                user.queueUid = user_node.Attributes["queueUid"].Value;
+                user.cloudSyncDevice = user_node.Attributes["cloudSyncDevice"].Value;
+                user.authenticationToken = user_node.Attributes["authenticationToken"].Value;
+            }
 
             return user;
         }
