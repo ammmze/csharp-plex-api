@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+//using System.Threading.Tasks;
 using PlexAPI;
 
 namespace Test
@@ -11,6 +11,7 @@ namespace Test
     {
 
         static MyPlex plex;
+		static User user;
 
         static void Main(string[] args)
         {
@@ -29,6 +30,19 @@ namespace Test
                     case "authenticate":
                         Authenticate();
                         break;
+					case "atoken":
+						AToken();
+					break;
+					case "pms":
+						Pms();
+						break;
+					case "servers":
+						Servers();
+						break;
+					case "sections":
+						Sections();
+						break;
+
                 }
             } while (command != "quit");
 
@@ -36,15 +50,49 @@ namespace Test
 
         static void Authenticate()
         {
-            Console.WriteLine("Username");
+            Console.Write("Username: ");
             var username = Console.ReadLine();
 
-            Console.WriteLine("Password");
+            Console.Write("Password: ");
             var password = Console.ReadLine();
 
-            var user = plex.authenticate(username, password);
+            user = plex.Authenticate(username, password);
+			Console.WriteLine("Plex Auth Token: " + user.authenticationToken);
         }
 
+		static void AToken()
+		{
+			user = new User();
+			Console.Write ("Enter Plex Auth Token: ");
+			user.authenticationToken = Console.ReadLine();
+		}
+
+		static void Pms()
+		{
+			plex.Pms(user);
+		}
+
+		static void Servers()
+		{
+			List<Server> servers = plex.GetServers(user);
+			for (var i = 0; i < servers.Count; i++) {
+				Console.WriteLine ("Found Server: " + servers[i].name);
+			}
+		}
+
+		static void Sections()
+		{
+			List<Server> servers = plex.GetServers(user);
+			
+			for (var i = 0; i < servers.Count; i++) {
+				Console.WriteLine ("Found Server: " + servers[i].name);
+				List<Section> sections = servers [i].GetLibrarySections ();
+				for (var j = 0; j < sections.Count; j++) {
+					Console.WriteLine ("Found Section: " + sections[i].title);
+					Console.WriteLine ("Type: " + sections[i].type);
+				}
+			}
+		}
 
     }
 }
