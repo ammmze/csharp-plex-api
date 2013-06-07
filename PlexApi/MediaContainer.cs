@@ -67,8 +67,7 @@ namespace PlexAPI
 			showDirectories = new List<DirectoryTypes.Show>();
 
 			var m = Execute<MediaContainer>(request, user);
-			directories = m.directories;
-			videos = m.videos;
+			Utils.CopyFrom<MediaContainer, MediaContainer> (this, m);
 
 			// Loop through directories and add the user, server and uri
 			for (var i = 0; i < directories.Count; i++) {
