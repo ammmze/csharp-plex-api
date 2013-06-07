@@ -51,11 +51,11 @@ namespace PlexAPI
 		public string grandparentStudio { get; set; }
 		public string grandparentTheme { get; set; }
 		public string grandparentTitle { get; set; }
-
-
-
-		public List<Video> videos { get; set; }
 		
+		public List<Video> videos { get; set; }
+		public List<Track> tracks { get; set; }
+		public List<Photo> photos { get; set; }
+
 		public MediaContainer () {}
 		public MediaContainer (User user, Server server, String uri) : base(user, server, uri) {Load ();}
 

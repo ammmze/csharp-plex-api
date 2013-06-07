@@ -64,6 +64,9 @@
     <Compile Include="Director.cs" />
     <Compile Include="Role.cs" />
     <Compile Include="Country.cs" />
+    <Compile Include="Location.cs" />
+    <Compile Include="Track.cs" />
+    <Compile Include="Photo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -26,7 +26,8 @@ namespace PlexAPI
 		public string originallyAvailableAt { get; set; }
 		public int leafCount { get; set; }
 		public string viewedLeafCount { get; set; }
-		public List<Genre> genre { get; set; }
+		public List<Genre> genres { get; set; }
+		public List<Location> locations { get; set; }
 
 
 		public Directory () {}
