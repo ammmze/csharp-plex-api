@@ -8,7 +8,7 @@ namespace PlexAPI
 	{	
 		public int ratingKey { get; set; }
 		public int parentRatingKey { get; set; }
-		public int parentKey { get; set; }
+		public string parentKey { get; set; }
 		public string studio { get; set; }
 		public string contentRating { get; set; }
 		public string summary { get; set; }
