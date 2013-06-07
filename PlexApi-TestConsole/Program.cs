@@ -116,7 +116,7 @@ namespace Test
 		static void Traverse()
 		{
 			int command = -1;
-			string uri = "library/sections/1/all";
+			string uri = "library/sections/";
 			do {
 				var mc = new MediaContainer (user, server, uri);
 				for (var i = 0; i < mc.videos.Count; i++) {
