@@ -1,13 +1,24 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="PlexApi-TestConsole/Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="PlexApi/MediaContainer.cs">
     <Files>
-      <File FileName="PlexApi/MyPlex.cs" Line="6" Column="7" />
-      <File FileName="PlexApi-TestConsole/Program.cs" Line="24" Column="1" />
+      <File FileName="PlexApi/MyPlex.cs" Line="20" Column="63" />
+      <File FileName="PlexApi/Server.cs" Line="43" Column="25" />
+      <File FileName="PlexApi/User.cs" Line="19" Column="41" />
+      <File FileName="PlexApi-TestConsole/Program.cs" Line="122" Column="48" />
+      <File FileName="PlexApi/Directory.cs" Line="13" Column="34" />
+      <File FileName="PlexApi/PlexItem.cs" Line="11" Column="35" />
+      <File FileName="PlexApi/MediaContainer.cs" Line="31" Column="4" />
+      <File FileName="PlexApi/Video.cs" Line="57" Column="27" />
+      <File FileName="PlexApi/Media.cs" Line="21" Column="41" />
+      <File FileName="PlexApi/Part.cs" Line="14" Column="14" />
+      <File FileName="PlexApi/PlexRest.cs" Line="40" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/brandencash/csharp-plex-api/PlexApi-TestConsole/Program.cs" line="122" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
